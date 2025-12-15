@@ -1,3 +1,4 @@
+import { Navbar } from '@/components/portfolio/Navbar';
 import { HeroSection } from '@/components/portfolio/HeroSection';
 import { TrustBar } from '@/components/portfolio/TrustBar';
 import { AboutSection } from '@/components/portfolio/AboutSection';
@@ -11,6 +12,7 @@ import { Footer } from '@/components/portfolio/Footer';
 const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Navbar />
       <HeroSection />
       <TrustBar />
       <AboutSection />

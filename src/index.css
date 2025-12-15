@@ -6,48 +6,46 @@
 
 @layer base {
   :root {
-    --background: 240 6% 4%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
 
-    --card: 240 6% 9%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 10%;
 
-    --popover: 240 6% 9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 239 84% 67%;
+    --primary: 330 85% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 4% 16%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 330 30% 96%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 240 4% 16%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 330 20% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 263 70% 58%;
+    --accent: 330 85% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 4% 26%;
-    --input: 240 4% 16%;
-    --ring: 239 84% 67%;
+    --border: 0 0% 90%;
+    --input: 0 0% 94%;
+    --ring: 330 85% 55%;
 
     --radius: 0.75rem;
 
     /* Custom Design Tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
-    --gradient-hero: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #0A0A0B 100%);
-    --gradient-mesh: radial-gradient(at 40% 20%, hsla(280, 70%, 50%, 0.3) 0px, transparent 50%),
-                     radial-gradient(at 80% 0%, hsla(239, 84%, 67%, 0.4) 0px, transparent 50%),
-                     radial-gradient(at 0% 50%, hsla(263, 70%, 58%, 0.3) 0px, transparent 50%),
-                     radial-gradient(at 80% 50%, hsla(240, 6%, 4%, 1) 0px, transparent 50%),
-                     radial-gradient(at 0% 100%, hsla(239, 84%, 67%, 0.2) 0px, transparent 50%);
+    --gradient-primary: linear-gradient(135deg, hsl(330, 85%, 55%) 0%, hsl(280, 70%, 50%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(330, 60%, 95%) 0%, hsl(0, 0%, 100%) 100%);
+    --gradient-mesh: radial-gradient(ellipse at 0% 0%, hsla(330, 85%, 75%, 0.4) 0px, transparent 50%),
+                     radial-gradient(ellipse at 100% 0%, hsla(280, 70%, 80%, 0.3) 0px, transparent 50%),
+                     radial-gradient(ellipse at 50% 100%, hsla(330, 60%, 90%, 0.5) 0px, transparent 60%);
     
-    --shadow-glow: 0 0 60px hsl(var(--primary) / 0.3);
-    --shadow-card: 0 4px 30px hsl(0 0% 0% / 0.3);
-    --shadow-card-hover: 0 20px 40px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 60px hsl(var(--primary) / 0.2);
+    --shadow-card: 0 4px 30px hsl(0 0% 0% / 0.08);
+    --shadow-card-hover: 0 20px 40px hsl(0 0% 0% / 0.12);
 
     --font-display: 'Syne', sans-serif;
     --font-body: 'Inter', sans-serif;
