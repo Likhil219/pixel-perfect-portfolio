@@ -1,8 +1,27 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
-const clients = [
-  'TechCorp', 'InnovateLabs', 'GrowthStart', 'DigitalFirst', 
-  'FutureScale', 'CloudNine', 'DataFlow', 'SmartSolutions'
+import airtableLogo from '@/assets/logos/airtable.png';
+import airtable2Logo from '@/assets/logos/airtable2.png';
+import facebookLogo from '@/assets/logos/facebook.png';
+import githubLogo from '@/assets/logos/github.png';
+import gmailLogo from '@/assets/logos/gmail.png';
+import googleDriveLogo from '@/assets/logos/google-drive.png';
+import slackLogo from '@/assets/logos/slack.png';
+import supabaseLogo from '@/assets/logos/supabase.png';
+import telegramLogo from '@/assets/logos/telegram.png';
+import whatsappLogo from '@/assets/logos/whatsapp.png';
+
+const logos = [
+  { src: airtableLogo, alt: 'Airtable' },
+  { src: airtable2Logo, alt: 'Airtable' },
+  { src: facebookLogo, alt: 'Facebook' },
+  { src: githubLogo, alt: 'GitHub' },
+  { src: gmailLogo, alt: 'Gmail' },
+  { src: googleDriveLogo, alt: 'Google Drive' },
+  { src: slackLogo, alt: 'Slack' },
+  { src: supabaseLogo, alt: 'Supabase' },
+  { src: telegramLogo, alt: 'Telegram' },
+  { src: whatsappLogo, alt: 'WhatsApp' },
 ];
 
 export function TrustBar() {
@@ -32,21 +51,17 @@ export function TrustBar() {
         {/* Marquee Track */}
         <div className="flex animate-marquee">
           {/* First Set */}
-          {[...clients, ...clients].map((client, index) => (
+          {[...logos, ...logos].map((logo, index) => (
             <div 
-              key={`${client}-${index}`}
-              className="flex-shrink-0 mx-12 group cursor-pointer"
+              key={`${logo.alt}-${index}`}
+              className="flex-shrink-0 mx-8 group cursor-pointer"
             >
-              <div className="flex items-center gap-3 px-6 py-3 rounded-lg transition-all duration-300 group-hover:bg-card">
-                {/* Logo Placeholder */}
-                <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center transition-all duration-300 grayscale group-hover:grayscale-0 group-hover:bg-primary/20">
-                  <span className="text-lg font-bold text-muted-foreground group-hover:text-primary transition-colors">
-                    {client.charAt(0)}
-                  </span>
-                </div>
-                <span className="text-muted-foreground font-medium group-hover:text-foreground transition-colors">
-                  {client}
-                </span>
+              <div className="flex items-center justify-center px-4 py-3 rounded-lg transition-all duration-300 group-hover:bg-card">
+                <img 
+                  src={logo.src} 
+                  alt={logo.alt}
+                  className="h-10 w-auto object-contain transition-all duration-300 opacity-70 group-hover:opacity-100"
+                />
               </div>
             </div>
           ))}
