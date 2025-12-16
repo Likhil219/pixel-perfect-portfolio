@@ -27,19 +27,29 @@ export function TestimonialsSection() {
   const { ref, isVisible } = useScrollReveal();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+      handleNext();
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, activeIndex]);
+
+  const handleNext = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+      setIsAnimating(false);
+    }, 400);
+  };
 
   const handleCardClick = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    handleNext();
   };
 
   const getCardStyle = (index: number) => {
@@ -48,25 +58,41 @@ export function TestimonialsSection() {
     if (position === 0) {
       // Front card
       return {
-        transform: 'translateX(0) scale(1)',
+        transform: isAnimating 
+          ? 'translateX(-60px) translateY(-40px) scale(0.9) rotate(-3deg)' 
+          : 'translateX(0) translateY(0) scale(1) rotate(0deg)',
         zIndex: 30,
-        opacity: 1,
+        opacity: isAnimating ? 0.5 : 1,
       };
     } else if (position === 1) {
-      // Second card (behind right)
+      // Second card (behind left-top)
       return {
-        transform: 'translateX(40px) scale(0.95)',
-        zIndex: 20,
-        opacity: 0.7,
+        transform: isAnimating
+          ? 'translateX(0) translateY(0) scale(1) rotate(0deg)'
+          : 'translateX(-30px) translateY(-20px) scale(0.95) rotate(-2deg)',
+        zIndex: isAnimating ? 30 : 20,
+        opacity: isAnimating ? 1 : 0.8,
       };
     } else {
-      // Third card (further behind)
+      // Third card (further behind left-top)
       return {
-        transform: 'translateX(80px) scale(0.9)',
+        transform: isAnimating
+          ? 'translateX(-30px) translateY(-20px) scale(0.95) rotate(-2deg)'
+          : 'translateX(-60px) translateY(-40px) scale(0.9) rotate(-4deg)',
         zIndex: 10,
-        opacity: 0.4,
+        opacity: isAnimating ? 0.8 : 0.5,
       };
     }
+  };
+
+  const getCardBorderColor = (index: number) => {
+    const position = (index - activeIndex + testimonials.length) % testimonials.length;
+    const colors = [
+      'border-primary/80', // Front - primary pink
+      'border-accent/60',  // Second - accent
+      'border-muted/40',   // Third - muted
+    ];
+    return colors[position] || colors[2];
   };
 
   return (
@@ -90,22 +116,22 @@ export function TestimonialsSection() {
 
         {/* Stacked Cards Container */}
         <div 
-          className={`relative h-[400px] md:h-[350px] transition-all duration-700 ${
+          className={`relative h-[420px] md:h-[380px] transition-all duration-700 ${
             isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}
           style={{ transitionDelay: '200ms' }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="relative w-full max-w-2xl mx-auto h-full">
+          <div className="relative w-full max-w-2xl mx-auto h-full pt-12 pl-16">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
                 onClick={handleCardClick}
-                className="absolute inset-0 cursor-pointer transition-all duration-500 ease-out"
+                className={`absolute inset-0 mt-12 ml-16 cursor-pointer transition-all duration-500 ease-out`}
                 style={getCardStyle(index)}
               >
-                <div className="relative bg-card border border-border/50 rounded-3xl p-8 md:p-10 h-full shadow-lg hover:shadow-xl transition-shadow">
+                <div className={`relative bg-card border-2 ${getCardBorderColor(index)} rounded-3xl p-8 md:p-10 h-full shadow-xl transition-all duration-500`}>
                   {/* Quote Icon */}
                   <div className="absolute -top-5 left-8">
                     <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-md">
@@ -146,11 +172,13 @@ export function TestimonialsSection() {
           </div>
 
           {/* Progress Dots */}
-          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setActiveIndex(index)}
+                onClick={() => {
+                  if (!isAnimating) setActiveIndex(index);
+                }}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === activeIndex 
                     ? 'w-8 bg-primary' 
