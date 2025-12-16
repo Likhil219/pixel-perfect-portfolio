@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { Quote, Star } from 'lucide-react';
 
 const testimonials = [
   {
@@ -33,26 +33,49 @@ export function TestimonialsSection() {
 
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  const goToPrev = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const goToNext = () => {
+  const handleCardClick = () => {
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
   };
 
+  const getCardStyle = (index: number) => {
+    const position = (index - activeIndex + testimonials.length) % testimonials.length;
+    
+    if (position === 0) {
+      // Front card
+      return {
+        transform: 'translateX(0) scale(1)',
+        zIndex: 30,
+        opacity: 1,
+      };
+    } else if (position === 1) {
+      // Second card (behind right)
+      return {
+        transform: 'translateX(40px) scale(0.95)',
+        zIndex: 20,
+        opacity: 0.7,
+      };
+    } else {
+      // Third card (further behind)
+      return {
+        transform: 'translateX(80px) scale(0.9)',
+        zIndex: 10,
+        opacity: 0.4,
+      };
+    }
+  };
+
   return (
-    <section id="testimonials" ref={ref} className="py-24 md:py-32 relative">
+    <section id="testimonials" ref={ref} className="py-24 md:py-32 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
 
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div 
           className={`text-center mb-16 transition-all duration-700 ${
@@ -65,100 +88,84 @@ export function TestimonialsSection() {
           </h2>
         </div>
 
-        {/* Testimonial Card */}
+        {/* Stacked Cards Container */}
         <div 
-          className={`relative transition-all duration-700 ${
+          className={`relative h-[400px] md:h-[350px] transition-all duration-700 ${
             isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}
           style={{ transitionDelay: '200ms' }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="relative bg-card border border-border/50 rounded-3xl p-8 md:p-12">
-            {/* Quote Icon */}
-            <div className="absolute -top-6 left-8">
-              <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-                <Quote className="w-6 h-6 text-primary-foreground" />
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="pt-4">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className={`transition-all duration-500 ${
-                    index === activeIndex 
-                      ? 'opacity-100 translate-y-0' 
-                      : 'opacity-0 translate-y-4 absolute inset-0 p-8 md:p-12 pt-12 pointer-events-none'
-                  }`}
-                >
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-6">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                    ))}
+          <div className="relative w-full max-w-2xl mx-auto h-full">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                onClick={handleCardClick}
+                className="absolute inset-0 cursor-pointer transition-all duration-500 ease-out"
+                style={getCardStyle(index)}
+              >
+                <div className="relative bg-card border border-border/50 rounded-3xl p-8 md:p-10 h-full shadow-lg hover:shadow-xl transition-shadow">
+                  {/* Quote Icon */}
+                  <div className="absolute -top-5 left-8">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-md">
+                      <Quote className="w-5 h-5 text-primary-foreground" />
+                    </div>
                   </div>
 
-                  {/* Quote */}
-                  <blockquote className="font-display text-2xl md:text-3xl font-medium leading-relaxed mb-8">
-                    "{testimonial.quote}"
-                  </blockquote>
-
-                  {/* Author */}
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                      <span className="text-lg font-bold text-primary-foreground">
-                        {testimonial.author.charAt(0)}
-                      </span>
+                  {/* Content */}
+                  <div className="pt-4 h-full flex flex-col">
+                    {/* Stars */}
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                      ))}
                     </div>
-                    <div>
-                      <div className="font-semibold">{testimonial.author}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+
+                    {/* Quote */}
+                    <blockquote className="font-display text-lg md:text-xl font-medium leading-relaxed mb-6 flex-grow">
+                      "{testimonial.quote}"
+                    </blockquote>
+
+                    {/* Author */}
+                    <div className="flex items-center gap-4 mt-auto">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                        <span className="text-lg font-bold text-primary-foreground">
+                          {testimonial.author.charAt(0)}
+                        </span>
+                      </div>
+                      <div>
+                        <div className="font-semibold">{testimonial.author}</div>
+                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-8 pt-8 border-t border-border">
-              {/* Arrows */}
-              <div className="flex gap-2">
-                <button 
-                  onClick={goToPrev}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center transition-all duration-300 hover:bg-card hover:border-primary"
-                  aria-label="Previous testimonial"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button 
-                  onClick={goToNext}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center transition-all duration-300 hover:bg-card hover:border-primary"
-                  aria-label="Next testimonial"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
               </div>
+            ))}
+          </div>
 
-              {/* Progress Dots */}
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveIndex(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === activeIndex 
-                        ? 'w-8 bg-primary' 
-                        : 'w-2 bg-border hover:bg-muted-foreground'
-                    }`}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+          {/* Progress Dots */}
+          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === activeIndex 
+                    ? 'w-8 bg-primary' 
+                    : 'w-2 bg-border hover:bg-muted-foreground'
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
+
+        {/* Click hint */}
+        <p className="text-center text-sm text-muted-foreground mt-12">
+          Click card to see next testimonial
+        </p>
       </div>
     </section>
   );
