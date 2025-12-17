@@ -59,6 +59,7 @@ export function HeroSection() {
           </button>
           
           <button 
+            onClick={() => window.open('https://www.youtube.com/channel/UCjk1XYuLUhMvjGISg2Udsuw', '_blank')}
             className="flex items-center gap-2 px-6 py-4 text-foreground font-medium transition-all duration-300 hover:text-primary"
           >
             Watch Video
