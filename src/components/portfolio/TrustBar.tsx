@@ -1,6 +1,5 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
-import airtableLogo from '@/assets/logos/airtable.png';
 import airtable2Logo from '@/assets/logos/airtable2.png';
 import facebookLogo from '@/assets/logos/facebook.png';
 import githubLogo from '@/assets/logos/github.png';
@@ -12,7 +11,6 @@ import telegramLogo from '@/assets/logos/telegram.png';
 import whatsappLogo from '@/assets/logos/whatsapp.png';
 
 const logos = [
-  { src: airtableLogo, alt: 'Airtable' },
   { src: airtable2Logo, alt: 'Airtable' },
   { src: facebookLogo, alt: 'Facebook' },
   { src: githubLogo, alt: 'GitHub' },
