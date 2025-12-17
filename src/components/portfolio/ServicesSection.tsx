@@ -1,43 +1,64 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { 
-  Monitor, 
-  Palette, 
-  Layout, 
-  Sparkles, 
-  Search,
+  Calendar, 
+  Hospital, 
+  MessageCircle, 
+  Users, 
+  Phone, 
+  Receipt, 
+  ShoppingCart, 
+  Bot,
   ArrowUpRight
 } from 'lucide-react';
 
 const services = [
   {
-    icon: Monitor,
-    title: 'Web Design & Development',
-    description: 'Beautiful, high-performance websites built to convert visitors into loyal customers.',
-    features: ['Custom Design', 'Responsive Build', 'Performance Optimized']
+    icon: Calendar,
+    title: 'Appointment Booking Automation',
+    description: 'WhatsApp appointment booking with auto slot checking, confirmations, and reminder messages.',
+    features: ['24/7 Booking', 'Auto Reminders', 'Unique IDs']
   },
   {
-    icon: Palette,
-    title: 'Brand Identity & Strategy',
-    description: 'Cohesive visual systems that resonate with your audience and stand out in the market.',
-    features: ['Logo Design', 'Brand Guidelines', 'Visual Identity']
+    icon: Hospital,
+    title: 'Hospital & Clinic Automation',
+    description: 'Patient registration, doctor scheduling, follow-ups, lab reports & billing automation.',
+    features: ['Patient Registration', 'Auto Follow-ups', 'Report Notifications']
   },
   {
-    icon: Layout,
-    title: 'UI/UX Design',
-    description: 'Intuitive interfaces backed by user research, testing, and data-driven decisions.',
-    features: ['User Research', 'Prototyping', 'Usability Testing']
+    icon: MessageCircle,
+    title: 'WhatsApp Business Automation',
+    description: 'Auto replies, lead qualification, order updates, payment reminders & broadcast campaigns.',
+    features: ['Auto Replies', 'Lead Qualification', 'Broadcast Campaigns']
   },
   {
-    icon: Sparkles,
-    title: 'Motion & Interaction Design',
-    description: 'Micro-animations and interactions that delight users and guide them seamlessly.',
-    features: ['Micro-interactions', 'Page Transitions', 'Loading States']
+    icon: Users,
+    title: 'Lead Generation & CRM Automation',
+    description: 'Website form to CRM, auto WhatsApp messages, lead scoring & follow-up sequences.',
+    features: ['Auto CRM Entry', 'Lead Scoring', 'Follow-up Sequences']
   },
   {
-    icon: Search,
-    title: 'Consulting & Audits',
-    description: 'Expert analysis to identify opportunities and optimize your digital presence.',
-    features: ['UX Audits', 'Strategy Sessions', 'Performance Reviews']
+    icon: Phone,
+    title: 'Voice Call Automation',
+    description: 'AI-powered appointment confirmations, missed call follow-ups & feedback collection calls.',
+    features: ['AI Voice Agents', 'Confirmation Calls', 'Feedback Collection']
+  },
+  {
+    icon: Receipt,
+    title: 'Invoice & Payment Automation',
+    description: 'Auto invoice generation, WhatsApp delivery, payment links & reminder automation.',
+    features: ['Auto Invoicing', 'Payment Links', 'Payment Tracking']
+  },
+  {
+    icon: ShoppingCart,
+    title: 'E-commerce / D2C Automation',
+    description: 'Order confirmations, shipping updates, COD confirmations & return support automation.',
+    features: ['Order Updates', 'Shipping Tracking', 'Return Automation']
+  },
+  {
+    icon: Bot,
+    title: 'Custom AI Chatbots',
+    description: 'Website & WhatsApp chatbots for FAQs, appointments, lead collection & product recommendations.',
+    features: ['RAG-based AI', 'Multi-platform', 'Custom Training']
   },
 ];
 
