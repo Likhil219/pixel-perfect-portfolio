@@ -9,6 +9,13 @@ import slackLogo from '@/assets/logos/slack.png';
 import supabaseLogo from '@/assets/logos/supabase.png';
 import telegramLogo from '@/assets/logos/telegram.png';
 import whatsappLogo from '@/assets/logos/whatsapp.png';
+import boltLogo from '@/assets/logos/bolt.png';
+import chatgptLogo from '@/assets/logos/chatgpt.png';
+import geminiLogo from '@/assets/logos/gemini.png';
+import lovableLogo from '@/assets/logos/lovable.png';
+import notionLogo from '@/assets/logos/notion.png';
+import shopifyLogo from '@/assets/logos/shopify.png';
+import whatsapp2Logo from '@/assets/logos/whatsapp-2.png';
 
 const logos = [
   { src: airtable2Logo, alt: 'Airtable' },
@@ -20,6 +27,13 @@ const logos = [
   { src: supabaseLogo, alt: 'Supabase' },
   { src: telegramLogo, alt: 'Telegram' },
   { src: whatsappLogo, alt: 'WhatsApp' },
+  { src: boltLogo, alt: 'Bolt' },
+  { src: chatgptLogo, alt: 'ChatGPT' },
+  { src: geminiLogo, alt: 'Gemini' },
+  { src: lovableLogo, alt: 'Lovable' },
+  { src: notionLogo, alt: 'Notion' },
+  { src: shopifyLogo, alt: 'Shopify' },
+  { src: whatsapp2Logo, alt: 'WhatsApp' },
 ];
 
 export function TrustBar() {
