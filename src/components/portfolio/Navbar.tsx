@@ -65,9 +65,6 @@ export function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Sign In
-            </button>
             <button 
               onClick={() => scrollToSection('#contact')}
               className="px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:bg-accent transition-colors"
@@ -104,9 +101,6 @@ export function Navbar() {
                 </button>
               ))}
               <div className="pt-4 mt-2 border-t border-border flex flex-col gap-2">
-                <button className="px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors text-left">
-                  Sign In
-                </button>
                 <button 
                   onClick={() => scrollToSection('#contact')}
                   className="mx-4 py-3 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:bg-accent transition-colors"
