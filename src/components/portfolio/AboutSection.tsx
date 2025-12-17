@@ -1,6 +1,6 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useCountUp } from '@/hooks/useCountUp';
-import { Code, Palette, Zap } from 'lucide-react';
+import likhilPhoto from '@/assets/likhil-photo.png';
 
 const stats = [
   { value: 20, suffix: '+', label: 'Years Experience' },
@@ -31,31 +31,14 @@ export function AboutSection() {
           >
             {/* Avatar Container */}
             <div className="relative">
-              {/* Geometric Avatar Illustration */}
               <div className="aspect-square max-w-md mx-auto relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl rotate-6 transition-transform duration-500 group-hover:rotate-12" />
-                <div className="relative bg-card rounded-3xl overflow-hidden border border-border/50 p-8">
-                  {/* Abstract Avatar */}
-                  <div className="aspect-square bg-gradient-to-br from-muted to-card rounded-2xl flex items-center justify-center relative overflow-hidden">
-                    {/* Geometric Shapes for Abstract Portrait */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-32 h-32 bg-primary/20 rounded-full absolute top-1/4" />
-                      <div className="w-48 h-24 bg-accent/10 rounded-full absolute bottom-0" />
-                    </div>
-                    
-                    {/* Icons Grid */}
-                    <div className="relative grid grid-cols-3 gap-4 p-8">
-                      <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center">
-                        <Code className="w-8 h-8 text-primary" />
-                      </div>
-                      <div className="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center">
-                        <Palette className="w-8 h-8 text-accent" />
-                      </div>
-                      <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center">
-                        <Zap className="w-8 h-8 text-primary" />
-                      </div>
-                    </div>
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl rotate-6 transition-transform duration-500 hover:rotate-12" />
+                <div className="relative bg-card rounded-3xl overflow-hidden border border-border/50">
+                  <img 
+                    src={likhilPhoto} 
+                    alt="Likhil - Automation Expert" 
+                    className="w-full h-full object-cover rounded-3xl"
+                  />
                 </div>
               </div>
 
