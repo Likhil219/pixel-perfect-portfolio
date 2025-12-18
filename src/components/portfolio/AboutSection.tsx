@@ -30,15 +30,27 @@ export function AboutSection() {
             }`}
           >
             {/* Avatar Container */}
-            <div className="relative">
+            <div className="relative group">
               <div className="aspect-square max-w-md mx-auto relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl rotate-6 transition-transform duration-500 hover:rotate-12" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl rotate-6 transition-transform duration-500 group-hover:rotate-12" />
                 <div className="relative bg-card rounded-3xl overflow-hidden border border-border/50">
                   <img 
                     src={likhilPhoto} 
                     alt="Likhil - Automation Expert" 
-                    className="w-full h-full object-cover rounded-3xl"
+                    className="w-full h-full object-cover rounded-3xl transition-transform duration-500 group-hover:scale-105"
                   />
+                  {/* Hover Greeting Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
+                    <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <span className="text-4xl animate-bounce inline-block">👋</span>
+                      <p className="text-primary-foreground font-display text-2xl font-bold mt-2">
+                        Hello there!
+                      </p>
+                      <p className="text-primary-foreground/80 text-sm mt-1">
+                        Nice to meet you
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
