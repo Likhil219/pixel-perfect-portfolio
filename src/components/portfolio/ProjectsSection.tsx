@@ -1,49 +1,56 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 
 const projects = [
   {
-    title: 'E-Commerce Redesign',
-    category: 'E-Commerce',
-    description: 'Complete redesign increasing conversions by 180%',
+    id: 'appointment-booking-automation',
+    title: 'Appointment Booking Automation',
+    category: 'Healthcare',
+    description: 'WhatsApp-based appointment booking with auto reminders',
     gradient: 'from-violet-600 to-indigo-600',
     year: '2024'
   },
   {
-    title: 'SaaS Dashboard',
-    category: 'SaaS',
-    description: 'Analytics platform serving 50K+ daily users',
+    id: 'hospital-clinic-automation',
+    title: 'Hospital & Clinic Automation',
+    category: 'Healthcare',
+    description: 'End-to-end hospital management automation',
     gradient: 'from-blue-600 to-cyan-500',
     year: '2024'
   },
   {
-    title: 'Luxury Brand Identity',
-    category: 'Branding',
-    description: 'Complete visual identity for premium fashion label',
+    id: 'whatsapp-business-automation',
+    title: 'WhatsApp Business Automation',
+    category: 'Business',
+    description: 'Complete WhatsApp automation suite for businesses',
+    gradient: 'from-emerald-500 to-teal-600',
+    year: '2024'
+  },
+  {
+    id: 'lead-generation-crm',
+    title: 'Lead Generation & CRM Automation',
+    category: 'Sales',
+    description: 'Automated lead capture and follow-up system',
     gradient: 'from-amber-500 to-orange-600',
     year: '2023'
   },
   {
-    title: 'FinTech Mobile App',
-    category: 'Mobile',
-    description: 'Award-winning banking experience for Gen Z',
-    gradient: 'from-emerald-500 to-teal-600',
-    year: '2023'
-  },
-  {
-    title: 'Tech Startup Launch',
-    category: 'Marketing',
-    description: 'Launch site that secured $2M in seed funding',
+    id: 'voice-call-automation',
+    title: 'Voice Call Automation',
+    category: 'Advanced',
+    description: 'AI-powered voice call automation system',
     gradient: 'from-pink-500 to-rose-600',
-    year: '2023'
+    year: '2024'
   },
   {
-    title: 'Product Configurator',
-    category: 'Product',
-    description: '3D product builder with real-time customization',
+    id: 'invoice-payment-automation',
+    title: 'Invoice & Payment Automation',
+    category: 'Finance',
+    description: 'Automated invoice generation and payment tracking',
     gradient: 'from-purple-600 to-violet-600',
-    year: '2024'
+    year: '2023'
   },
 ];
 
@@ -53,10 +60,15 @@ export function ProjectsSection() {
   const { ref, isVisible } = useScrollReveal();
   const [activeCategory, setActiveCategory] = useState('All');
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const filteredProjects = activeCategory === 'All' 
     ? projects 
     : projects.filter(p => p.category === activeCategory);
+
+  const handleProjectClick = (projectId: string) => {
+    navigate(`/project/${projectId}`);
+  };
 
   return (
     <section id="projects" ref={ref} className="py-24 md:py-32 relative">
@@ -102,14 +114,15 @@ export function ProjectsSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project, index) => (
             <ProjectCard 
-              key={project.title} 
+              key={project.id} 
               {...project} 
               isVisible={isVisible}
               delay={index * 80}
-              isHovered={hoveredProject === project.title}
-              isBlurred={hoveredProject !== null && hoveredProject !== project.title}
-              onHover={() => setHoveredProject(project.title)}
+              isHovered={hoveredProject === project.id}
+              isBlurred={hoveredProject !== null && hoveredProject !== project.id}
+              onHover={() => setHoveredProject(project.id)}
               onLeave={() => setHoveredProject(null)}
+              onClick={() => handleProjectClick(project.id)}
             />
           ))}
         </div>
@@ -119,6 +132,7 @@ export function ProjectsSection() {
 }
 
 function ProjectCard({ 
+  id,
   title, 
   category, 
   description, 
@@ -129,8 +143,10 @@ function ProjectCard({
   isHovered,
   isBlurred,
   onHover,
-  onLeave
+  onLeave,
+  onClick
 }: { 
+  id: string;
   title: string; 
   category: string; 
   description: string; 
@@ -142,6 +158,7 @@ function ProjectCard({
   isBlurred: boolean;
   onHover: () => void;
   onLeave: () => void;
+  onClick: () => void;
 }) {
   return (
     <div 
@@ -151,6 +168,7 @@ function ProjectCard({
       style={{ transitionDelay: `${delay}ms` }}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
+      onClick={onClick}
     >
       {/* Thumbnail */}
       <div className={`aspect-[4/3] bg-gradient-to-br ${gradient} relative overflow-hidden`}>
