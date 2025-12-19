@@ -72,7 +72,7 @@ export function TrustBar() {
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
-                  className="h-10 w-auto object-contain transition-all duration-300 opacity-70 group-hover:opacity-100"
+                  className="h-10 w-auto object-contain transition-all duration-300 opacity-70 group-hover:opacity-100 group-hover:scale-125"
                 />
               </div>
             </div>
