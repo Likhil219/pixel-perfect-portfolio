@@ -68,11 +68,11 @@ export function TrustBar() {
               key={`${logo.alt}-${index}`}
               className="flex-shrink-0 mx-8 group cursor-pointer"
             >
-              <div className="flex items-center justify-center px-4 py-3 rounded-lg transition-all duration-300 group-hover:bg-card">
+              <div className="flex items-center justify-center px-4 py-3 rounded-xl transition-all duration-500 group-hover:bg-primary/10 group-hover:shadow-lg group-hover:shadow-primary/20">
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
-                  className="h-10 w-auto object-contain transition-all duration-300 opacity-70 group-hover:opacity-100 group-hover:scale-125"
+                  className="h-10 w-auto object-contain transition-all duration-500 opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-125 group-hover:-translate-y-2 group-hover:drop-shadow-[0_8px_12px_rgba(var(--primary),0.3)]"
                 />
               </div>
             </div>
