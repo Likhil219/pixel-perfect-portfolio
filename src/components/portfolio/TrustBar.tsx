@@ -1,39 +1,23 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
-import airtable2Logo from '@/assets/logos/airtable2.png';
-import facebookLogo from '@/assets/logos/facebook.png';
-import githubLogo from '@/assets/logos/github.png';
-import gmailLogo from '@/assets/logos/gmail.png';
-import googleDriveLogo from '@/assets/logos/google-drive.png';
-import slackLogo from '@/assets/logos/slack.png';
-import supabaseLogo from '@/assets/logos/supabase.png';
-import telegramLogo from '@/assets/logos/telegram.png';
-import whatsappLogo from '@/assets/logos/whatsapp.png';
-import boltLogo from '@/assets/logos/bolt.png';
-import chatgptLogo from '@/assets/logos/chatgpt.png';
-import geminiLogo from '@/assets/logos/gemini.png';
-import lovableLogo from '@/assets/logos/lovable.png';
-import notionLogo from '@/assets/logos/notion.png';
-import shopifyLogo from '@/assets/logos/shopify.png';
-import whatsapp2Logo from '@/assets/logos/whatsapp-2.png';
+import figmaLogo from '@/assets/logos/figma.png';
+import googleCalendarLogo from '@/assets/logos/google-calendar.png';
+import notionLogo from '@/assets/logos/notion-2.png';
+import pineconeLogo from '@/assets/logos/pinecone.png';
+import salesforceLogo from '@/assets/logos/salesforce.png';
+import sheetsLogo from '@/assets/logos/sheets.png';
+import shopifyLogo from '@/assets/logos/shopify-2.png';
+import zoomLogo from '@/assets/logos/zoom.png';
 
 const logos = [
-  { src: airtable2Logo, alt: 'Airtable' },
-  { src: facebookLogo, alt: 'Facebook' },
-  { src: githubLogo, alt: 'GitHub' },
-  { src: gmailLogo, alt: 'Gmail' },
-  { src: googleDriveLogo, alt: 'Google Drive' },
-  { src: slackLogo, alt: 'Slack' },
-  { src: supabaseLogo, alt: 'Supabase' },
-  { src: telegramLogo, alt: 'Telegram' },
-  { src: whatsappLogo, alt: 'WhatsApp' },
-  { src: boltLogo, alt: 'Bolt' },
-  { src: chatgptLogo, alt: 'ChatGPT' },
-  { src: geminiLogo, alt: 'Gemini' },
-  { src: lovableLogo, alt: 'Lovable' },
+  { src: figmaLogo, alt: 'Figma' },
+  { src: googleCalendarLogo, alt: 'Google Calendar' },
   { src: notionLogo, alt: 'Notion' },
+  { src: pineconeLogo, alt: 'Pinecone' },
+  { src: salesforceLogo, alt: 'Salesforce' },
+  { src: sheetsLogo, alt: 'Google Sheets' },
   { src: shopifyLogo, alt: 'Shopify' },
-  { src: whatsapp2Logo, alt: 'WhatsApp' },
+  { src: zoomLogo, alt: 'Zoom' },
 ];
 
 export function TrustBar() {
