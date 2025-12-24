@@ -6,47 +6,47 @@
 
 @layer base {
   :root {
-    /* New Color Theme: #A0937D, #E7D4B5, #F6E6CB, #E3CDC1 */
-    --background: 39 69% 88%;
-    --foreground: 30 20% 25%;
+    /* New Color Theme: #222831, #00ADB5, #EEEEEE */
+    --background: 210 17% 16%;
+    --foreground: 0 0% 93%;
 
-    --card: 36 50% 81%;
-    --card-foreground: 30 20% 25%;
+    --card: 210 17% 20%;
+    --card-foreground: 0 0% 93%;
 
-    --popover: 39 69% 91%;
-    --popover-foreground: 30 20% 25%;
+    --popover: 210 17% 18%;
+    --popover-foreground: 0 0% 93%;
 
-    --primary: 30 14% 56%;
-    --primary-foreground: 39 69% 95%;
+    --primary: 183 100% 35%;
+    --primary-foreground: 210 17% 16%;
 
-    --secondary: 22 35% 82%;
-    --secondary-foreground: 30 20% 25%;
+    --secondary: 210 17% 24%;
+    --secondary-foreground: 0 0% 93%;
 
-    --muted: 36 40% 85%;
-    --muted-foreground: 30 14% 45%;
+    --muted: 210 17% 22%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 22 35% 82%;
-    --accent-foreground: 30 20% 25%;
+    --accent: 183 100% 40%;
+    --accent-foreground: 210 17% 16%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 39 69% 95%;
+    --destructive-foreground: 0 0% 93%;
 
-    --border: 30 14% 70%;
-    --input: 36 50% 85%;
-    --ring: 30 14% 56%;
+    --border: 210 17% 28%;
+    --input: 210 17% 24%;
+    --ring: 183 100% 35%;
 
     --radius: 0.75rem;
 
     /* Custom Design Tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(30, 14%, 56%) 0%, hsl(30, 20%, 65%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(39, 69%, 90%) 0%, hsl(39, 69%, 88%) 100%);
-    --gradient-mesh: radial-gradient(ellipse at 0% 0%, hsla(30, 14%, 56%, 0.15) 0px, transparent 50%),
-                     radial-gradient(ellipse at 100% 0%, hsla(22, 35%, 82%, 0.3) 0px, transparent 50%),
-                     radial-gradient(ellipse at 50% 100%, hsla(36, 50%, 81%, 0.4) 0px, transparent 60%);
+    --gradient-primary: linear-gradient(135deg, hsl(183, 100%, 35%) 0%, hsl(183, 80%, 45%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(210, 17%, 14%) 0%, hsl(210, 17%, 16%) 100%);
+    --gradient-mesh: radial-gradient(ellipse at 0% 0%, hsla(183, 100%, 35%, 0.15) 0px, transparent 50%),
+                     radial-gradient(ellipse at 100% 0%, hsla(183, 80%, 45%, 0.1) 0px, transparent 50%),
+                     radial-gradient(ellipse at 50% 100%, hsla(183, 100%, 35%, 0.1) 0px, transparent 60%);
     
-    --shadow-glow: 0 0 60px hsl(var(--primary) / 0.2);
-    --shadow-card: 0 4px 30px hsl(30 20% 20% / 0.08);
-    --shadow-card-hover: 0 20px 40px hsl(30 20% 20% / 0.12);
+    --shadow-glow: 0 0 60px hsl(var(--primary) / 0.3);
+    --shadow-card: 0 4px 30px hsl(0 0% 0% / 0.3);
+    --shadow-card-hover: 0 20px 40px hsl(0 0% 0% / 0.4);
 
     --font-display: 'Syne', sans-serif;
     --font-body: 'Inter', sans-serif;
