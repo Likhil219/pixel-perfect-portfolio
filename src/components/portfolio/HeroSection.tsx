@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { ArrowDown, Play } from 'lucide-react';
-import heroVideo from '@/assets/hero-video.mp4';
 
 export function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -15,26 +14,12 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Video */}
-      <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className={`w-full h-full object-cover transition-all duration-1000 ${
-            isLoaded ? 'opacity-40 scale-100' : 'opacity-0 scale-105'
-          }`}
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-background/70" />
-      </div>
+      {/* Gradient Background */}
+      <div className="absolute inset-0 gradient-hero-bg" />
       
       {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl z-[1]" />
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-tl from-accent/20 to-transparent rounded-full blur-3xl z-[1]" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-tl from-accent/20 to-transparent rounded-full blur-3xl" />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
