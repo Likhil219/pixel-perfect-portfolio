@@ -14,8 +14,19 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 gradient-hero-bg" />
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/videos/hero-bg.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Dark Overlay for better text readability */}
+      <div className="absolute inset-0 bg-background/70" />
       
       {/* Decorative Elements */}
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl" />
