@@ -1,5 +1,6 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useCountUp } from '@/hooks/useCountUp';
+import { useState, useRef, useEffect } from 'react';
 import likhilPhoto from '@/assets/likhil-photo.png';
 
 const stats = [
@@ -10,6 +11,41 @@ const stats = [
 
 export function AboutSection() {
   const { ref, isVisible } = useScrollReveal();
+  const [showVideo, setShowVideo] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+    hoverTimeoutRef.current = setTimeout(() => {
+      setShowVideo(true);
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play();
+      }
+    }, 2000);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setShowVideo(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section id="about" ref={ref} className="py-24 md:py-32 relative overflow-hidden">
@@ -30,33 +66,67 @@ export function AboutSection() {
             }`}
           >
             {/* Avatar Container */}
-            <div className="relative group">
+            <div 
+              className="relative group"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               <div className="aspect-square max-w-md mx-auto relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl rotate-6 transition-transform duration-500 group-hover:rotate-12" />
+                <div className={`absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl transition-all duration-500 ${showVideo ? 'rotate-0 scale-105' : 'rotate-6 group-hover:rotate-12'}`} />
                 <div className="relative bg-card rounded-3xl overflow-hidden border border-border/50">
                   <img 
                     src={likhilPhoto} 
                     alt="Likhil - Automation Expert" 
-                    className="w-full h-full object-cover rounded-3xl transition-transform duration-500 group-hover:scale-105"
+                    className={`w-full h-full object-cover rounded-3xl transition-all duration-700 ${showVideo ? 'opacity-0 scale-95' : 'opacity-100 group-hover:scale-105'}`}
                   />
-                  {/* Hover Greeting Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
-                    <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  
+                  {/* Video Overlay */}
+                  <video
+                    ref={videoRef}
+                    muted
+                    loop
+                    playsInline
+                    className={`absolute inset-0 w-full h-full object-cover rounded-3xl transition-all duration-700 ease-out ${
+                      showVideo 
+                        ? 'opacity-100 scale-100 blur-0' 
+                        : 'opacity-0 scale-110 blur-sm pointer-events-none'
+                    }`}
+                  >
+                    <source src="/videos/about-hover.mp4" type="video/mp4" />
+                  </video>
+
+                  {/* Shimmer Effect when video is loading */}
+                  <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded-3xl transition-opacity duration-500 ${
+                    isHovering && !showVideo ? 'opacity-100 animate-shimmer' : 'opacity-0'
+                  }`} />
+                  
+                  {/* Hover Greeting Overlay - only show when hovering but video not yet visible */}
+                  <div className={`absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent rounded-3xl transition-all duration-500 flex items-end justify-center pb-8 ${
+                    isHovering && !showVideo ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  }`}>
+                    <div className={`text-center transition-transform duration-500 ${isHovering && !showVideo ? 'translate-y-0' : 'translate-y-4'}`}>
                       <span className="text-4xl animate-bounce inline-block">👋</span>
                       <p className="text-primary-foreground font-display text-2xl font-bold mt-2">
                         Hello there!
                       </p>
                       <p className="text-primary-foreground/80 text-sm mt-1">
-                        Nice to meet you
+                        Keep hovering...
                       </p>
                     </div>
                   </div>
+
+                  {/* Glowing border when video plays */}
+                  <div className={`absolute inset-0 rounded-3xl border-2 transition-all duration-700 ${
+                    showVideo 
+                      ? 'border-primary/60 shadow-[0_0_30px_rgba(var(--primary),0.3)]' 
+                      : 'border-transparent'
+                  }`} />
                 </div>
               </div>
 
               {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 border-2 border-primary rounded-lg rotate-12 animate-float" />
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-accent rounded-full animate-pulse-glow" />
+              <div className={`absolute -top-4 -right-4 w-8 h-8 border-2 border-primary rounded-lg transition-all duration-500 ${showVideo ? 'rotate-45 scale-125' : 'rotate-12'} animate-float`} />
+              <div className={`absolute -bottom-4 -left-4 w-6 h-6 bg-accent rounded-full transition-all duration-500 ${showVideo ? 'scale-150' : ''} animate-pulse-glow`} />
             </div>
           </div>
 
