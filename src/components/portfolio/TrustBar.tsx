@@ -63,30 +63,6 @@ export function TrustBar() {
         </div>
       </div>
 
-      {/* Second Marquee - Left to Right */}
-      <div className="relative">
-        {/* Fade Edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-
-        {/* Marquee Track - Reverse */}
-        <div className="flex animate-marquee-reverse">
-          {[...logos, ...logos].reverse().map((logo, index) => (
-            <div 
-              key={`row2-${logo.alt}-${index}`}
-              className="flex-shrink-0 mx-8 group cursor-pointer"
-            >
-              <div className="flex items-center justify-center px-4 py-3 rounded-xl transition-all duration-500">
-                <img 
-                  src={logo.src} 
-                  alt={logo.alt}
-                  className="h-10 w-auto object-contain transition-all duration-500 opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-125 group-hover:-translate-y-2 group-hover:drop-shadow-[0_8px_12px_rgba(var(--primary),0.3)]"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
