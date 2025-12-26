@@ -1,22 +1,42 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
+import airtableLogo from '@/assets/logos/airtable.png';
+import boltLogo from '@/assets/logos/bolt.png';
+import chatgptLogo from '@/assets/logos/chatgpt.png';
+import facebookLogo from '@/assets/logos/facebook.png';
 import figmaLogo from '@/assets/logos/figma.png';
+import geminiLogo from '@/assets/logos/gemini.png';
+import githubLogo from '@/assets/logos/github.png';
+import gmailLogo from '@/assets/logos/gmail.png';
 import googleCalendarLogo from '@/assets/logos/google-calendar.png';
+import googleDriveLogo from '@/assets/logos/google-drive.png';
+import lovableLogo from '@/assets/logos/lovable.png';
 import notionLogo from '@/assets/logos/notion-2.png';
 import pineconeLogo from '@/assets/logos/pinecone.png';
 import salesforceLogo from '@/assets/logos/salesforce.png';
 import sheetsLogo from '@/assets/logos/sheets.png';
 import shopifyLogo from '@/assets/logos/shopify-2.png';
+import slackLogo from '@/assets/logos/slack.png';
 import zoomLogo from '@/assets/logos/zoom.png';
 
 const logos = [
+  { src: airtableLogo, alt: 'Airtable' },
+  { src: boltLogo, alt: 'Bolt' },
+  { src: chatgptLogo, alt: 'ChatGPT' },
+  { src: facebookLogo, alt: 'Facebook' },
   { src: figmaLogo, alt: 'Figma' },
+  { src: geminiLogo, alt: 'Gemini' },
+  { src: githubLogo, alt: 'GitHub' },
+  { src: gmailLogo, alt: 'Gmail' },
   { src: googleCalendarLogo, alt: 'Google Calendar' },
+  { src: googleDriveLogo, alt: 'Google Drive' },
+  { src: lovableLogo, alt: 'Lovable' },
   { src: notionLogo, alt: 'Notion' },
   { src: pineconeLogo, alt: 'Pinecone' },
   { src: salesforceLogo, alt: 'Salesforce' },
   { src: sheetsLogo, alt: 'Google Sheets' },
   { src: shopifyLogo, alt: 'Shopify' },
+  { src: slackLogo, alt: 'Slack' },
   { src: zoomLogo, alt: 'Zoom' },
 ];
 
@@ -45,7 +65,7 @@ export function TrustBar() {
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
         {/* Marquee Track */}
-        <div className="flex animate-marquee">
+        <div className="flex animate-marquee-fast">
           {[...logos, ...logos].map((logo, index) => (
             <div 
               key={`row1-${logo.alt}-${index}`}
@@ -62,7 +82,6 @@ export function TrustBar() {
           ))}
         </div>
       </div>
-
     </section>
   );
 }
