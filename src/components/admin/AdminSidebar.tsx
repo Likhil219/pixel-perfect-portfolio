@@ -6,7 +6,8 @@ import {
   MessageSquareQuote, 
   LogOut,
   ChevronLeft,
-  Menu
+  Menu,
+  Sparkles
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -31,20 +32,25 @@ export function AdminSidebar() {
   return (
     <aside
       className={cn(
-        "h-screen bg-surface border-r border-border flex flex-col transition-all duration-300",
+        "h-screen bg-surface border-r border-border flex flex-col transition-all duration-300 sticky top-0",
         collapsed ? "w-16" : "w-64"
       )}
     >
       {/* Header */}
       <div className="h-16 flex items-center justify-between px-4 border-b border-border">
         {!collapsed && (
-          <span className="font-bold text-lg text-foreground">Admin Panel</span>
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center">
+              <Sparkles className="h-4 w-4 text-white" />
+            </div>
+            <span className="font-bold text-lg text-foreground font-display">Admin</span>
+          </div>
         )}
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setCollapsed(!collapsed)}
-          className="text-muted-foreground hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground hover:bg-muted"
         >
           {collapsed ? <Menu className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
         </Button>
@@ -59,9 +65,9 @@ export function AdminSidebar() {
             end={item.end}
             className={({ isActive }) =>
               cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors",
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200",
                 isActive
-                  ? "bg-accent text-accent-foreground"
+                  ? "bg-accent/20 text-accent border border-accent/30"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted"
               )
             }
