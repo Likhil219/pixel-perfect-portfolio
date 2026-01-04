@@ -16,26 +16,32 @@ export function StatsCard({ title, value, icon: Icon, trend, className }: StatsC
   return (
     <div
       className={cn(
-        "bg-surface border border-border rounded-xl p-6 transition-all hover:border-accent/50",
+        "bg-surface border border-border rounded-xl p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/5 group",
         className
       )}
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm text-muted-foreground font-medium">{title}</p>
-          <p className="text-3xl font-bold text-foreground mt-2">{value}</p>
+          <p className="text-sm text-muted-foreground font-medium uppercase tracking-wider">{title}</p>
+          <p className="text-4xl font-bold text-foreground mt-3 font-display">{value}</p>
           {trend && (
             <p
               className={cn(
-                "text-sm mt-2 font-medium",
-                trend.isPositive ? "text-green-500" : "text-red-500"
+                "text-sm mt-3 font-medium flex items-center gap-1",
+                trend.isPositive ? "text-success" : "text-destructive"
               )}
             >
-              {trend.isPositive ? "+" : "-"}{Math.abs(trend.value)}% from last month
+              <span className={cn(
+                "inline-block w-0 h-0 border-l-[5px] border-r-[5px] border-transparent",
+                trend.isPositive 
+                  ? "border-b-[6px] border-b-success" 
+                  : "border-t-[6px] border-t-destructive"
+              )} />
+              {Math.abs(trend.value)}% from last month
             </p>
           )}
         </div>
-        <div className="p-3 bg-accent/10 rounded-lg">
+        <div className="p-3 bg-accent/10 rounded-xl group-hover:bg-accent/20 transition-colors">
           <Icon className="h-6 w-6 text-accent" />
         </div>
       </div>

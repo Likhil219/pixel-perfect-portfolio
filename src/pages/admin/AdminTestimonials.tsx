@@ -74,23 +74,32 @@ export default function AdminTestimonials() {
   );
 
   const columns = [
-    { key: 'clientName', label: 'Client' },
-    { key: 'clientRole', label: 'Role' },
+    { key: 'clientName', label: 'Client', render: (t: Testimonial) => (
+      <div>
+        <span className="font-medium text-foreground">{t.clientName}</span>
+        <p className="text-xs text-muted-foreground">{t.clientRole}</p>
+      </div>
+    )},
     { key: 'feedback', label: 'Feedback', render: (t: Testimonial) => (
-      <span className="line-clamp-1 max-w-xs">{t.feedback}</span>
+      <span className="line-clamp-2 max-w-xs text-muted-foreground">{t.feedback}</span>
     )},
     { key: 'rating', label: 'Rating', render: (t: Testimonial) => (
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-0.5">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
             key={i}
-            className={`h-4 w-4 ${i < t.rating ? 'fill-yellow-500 text-yellow-500' : 'text-muted-foreground'}`}
+            className={`h-4 w-4 ${i < t.rating ? 'fill-amber-400 text-amber-400' : 'text-muted-foreground/30'}`}
           />
         ))}
       </div>
     )},
     { key: 'isApproved', label: 'Status', render: (t: Testimonial) => (
-      <Badge variant={t.isApproved ? 'default' : 'secondary'}>
+      <Badge 
+        className={t.isApproved 
+          ? 'bg-success/20 text-success border-0' 
+          : 'bg-amber-500/20 text-amber-500 border-0'
+        }
+      >
         {t.isApproved ? 'Approved' : 'Pending'}
       </Badge>
     )},
@@ -159,80 +168,86 @@ export default function AdminTestimonials() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Testimonials</h1>
+          <h1 className="text-3xl font-bold text-foreground font-display">Testimonials</h1>
           <p className="text-muted-foreground mt-1">
             Manage client feedback and reviews
           </p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button onClick={() => resetForm()} className="bg-accent hover:bg-accent/90">
+            <Button onClick={() => resetForm()} className="bg-gradient-to-r from-accent to-primary hover:opacity-90 text-white">
               <Plus className="h-4 w-4 mr-2" />
               Add Testimonial
             </Button>
           </DialogTrigger>
           <DialogContent className="bg-surface border-border max-w-lg">
             <DialogHeader>
-              <DialogTitle>{editingTestimonial ? 'Edit Testimonial' : 'Add New Testimonial'}</DialogTitle>
+              <DialogTitle className="font-display text-xl">
+                {editingTestimonial ? 'Edit Testimonial' : 'Add New Testimonial'}
+              </DialogTitle>
             </DialogHeader>
-            <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+            <form onSubmit={handleSubmit} className="space-y-5 mt-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="clientName">Client Name</Label>
+                  <Label htmlFor="clientName" className="text-foreground">Client Name</Label>
                   <Input
                     id="clientName"
                     value={formData.clientName}
                     onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
-                    className="bg-background border-border"
+                    className="bg-background/50 border-border h-11 focus:border-accent"
+                    placeholder="John Doe"
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="clientRole">Client Role</Label>
+                  <Label htmlFor="clientRole" className="text-foreground">Client Role</Label>
                   <Input
                     id="clientRole"
                     value={formData.clientRole}
                     onChange={(e) => setFormData({ ...formData, clientRole: e.target.value })}
                     placeholder="CEO at Company"
-                    className="bg-background border-border"
+                    className="bg-background/50 border-border h-11 focus:border-accent"
                     required
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="feedback">Feedback</Label>
+                <Label htmlFor="feedback" className="text-foreground">Feedback</Label>
                 <Textarea
                   id="feedback"
                   value={formData.feedback}
                   onChange={(e) => setFormData({ ...formData, feedback: e.target.value })}
-                  className="bg-background border-border"
-                  rows={4}
+                  className="bg-background/50 border-border min-h-[120px] focus:border-accent resize-none"
+                  placeholder="What did the client say about your work?"
                   required
                 />
               </div>
               <div className="space-y-2">
-                <Label>Rating</Label>
-                <div className="flex items-center gap-1">
+                <Label className="text-foreground">Rating</Label>
+                <div className="flex items-center gap-2 p-3 bg-background/50 rounded-lg border border-border">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <button
                       key={i}
                       type="button"
                       onClick={() => setFormData({ ...formData, rating: i + 1 })}
-                      className="p-1 hover:scale-110 transition-transform"
+                      className="p-1 hover:scale-125 transition-transform"
                     >
                       <Star
-                        className={`h-6 w-6 ${i < formData.rating ? 'fill-yellow-500 text-yellow-500' : 'text-muted-foreground'}`}
+                        className={`h-7 w-7 ${i < formData.rating ? 'fill-amber-400 text-amber-400' : 'text-muted-foreground/30 hover:text-amber-400/50'}`}
                       />
                     </button>
                   ))}
+                  <span className="ml-2 text-sm text-muted-foreground">
+                    {formData.rating} of 5
+                  </span>
                 </div>
               </div>
-              <div className="flex justify-end gap-3 pt-4">
-                <Button type="button" variant="outline" onClick={resetForm}>
+              <div className="flex justify-end gap-3 pt-4 border-t border-border">
+                <Button type="button" variant="outline" onClick={resetForm} className="border-border hover:bg-muted">
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-accent hover:bg-accent/90">
-                  {editingTestimonial ? 'Update' : 'Create'}
+                <Button type="submit" className="bg-gradient-to-r from-accent to-primary hover:opacity-90 text-white">
+                  {editingTestimonial ? 'Update Testimonial' : 'Create Testimonial'}
                 </Button>
               </div>
             </form>
@@ -247,7 +262,7 @@ export default function AdminTestimonials() {
           placeholder="Search testimonials..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10 bg-surface border-border"
+          className="pl-10 bg-surface border-border h-11 focus:border-accent"
         />
       </div>
 
