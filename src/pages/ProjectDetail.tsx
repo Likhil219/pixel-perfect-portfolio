@@ -242,7 +242,7 @@ export default function ProjectDetail() {
                 </Button>
                 <Button size="lg" variant="outline" className="gap-2">
                   <Github className="w-4 h-4" />
-                  View Code
+                  Store to Buy Template
                 </Button>
               </div>
             </div>
