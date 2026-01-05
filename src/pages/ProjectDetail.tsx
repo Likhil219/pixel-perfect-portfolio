@@ -1,8 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Play, ShoppingCart, Calendar } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Play, ShoppingCart, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Navbar } from '@/components/portfolio/Navbar';
 import { Footer } from '@/components/portfolio/Footer';
+import { useState, useEffect, useCallback } from 'react';
 
 const projects = [
   {
@@ -14,6 +15,11 @@ const projects = [
     year: '2024',
     client: 'Multi-Specialty Hospital',
     duration: '6 weeks',
+    images: [
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800',
+      'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800',
+      'https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=800'
+    ],
     features: [
       'WhatsApp appointment booking bot',
       'Auto slot checking & availability',
@@ -42,6 +48,11 @@ const projects = [
     year: '2024',
     client: 'City Diagnostic Center',
     duration: '8 weeks',
+    images: [
+      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800',
+      'https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800',
+      'https://images.unsplash.com/photo-1551076805-e1869033e561?w=800'
+    ],
     features: [
       'Patient registration via WhatsApp',
       'Doctor-wise appointment scheduling',
@@ -70,6 +81,11 @@ const projects = [
     year: '2024',
     client: 'E-commerce Business',
     duration: '4 weeks',
+    images: [
+      'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800',
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
+      'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=800'
+    ],
     features: [
       'Auto replies to FAQs',
       'Lead qualification bot',
@@ -98,6 +114,11 @@ const projects = [
     year: '2023',
     client: 'Real Estate Agency',
     duration: '5 weeks',
+    images: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
+      'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800'
+    ],
     features: [
       'Website form → CRM auto entry',
       'Auto WhatsApp message on new lead',
@@ -126,6 +147,11 @@ const projects = [
     year: '2024',
     client: 'Sales Team',
     duration: '6 weeks',
+    images: [
+      'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800',
+      'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=800',
+      'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800'
+    ],
     features: [
       'Appointment confirmation calls',
       'Missed call follow-up',
@@ -154,6 +180,11 @@ const projects = [
     year: '2023',
     client: 'Freelance Agency',
     duration: '3 weeks',
+    images: [
+      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800',
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800'
+    ],
     features: [
       'Auto invoice generation',
       'WhatsApp invoice delivery',
@@ -178,6 +209,33 @@ const projects = [
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = projects.find(p => p.id === id);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const images = project?.images || [];
+
+  const nextImage = useCallback(() => {
+    if (images.length > 1) {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }
+  }, [images.length]);
+
+  const prevImage = useCallback(() => {
+    if (images.length > 1) {
+      setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    }
+  }, [images.length]);
+
+  // Auto-scroll effect
+  useEffect(() => {
+    if (images.length <= 1 || isPaused) return;
+
+    const interval = setInterval(() => {
+      nextImage();
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [images.length, isPaused, nextImage]);
 
   if (!project) {
     return (
@@ -247,17 +305,77 @@ export default function ProjectDetail() {
               </div>
             </div>
             
-            {/* Project Thumbnail */}
-            <div className={`aspect-video rounded-2xl bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
-                  <Play className="w-8 h-8 text-white fill-white" />
+            {/* Project Images Carousel */}
+            <div 
+              className="aspect-video rounded-2xl relative overflow-hidden group"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+            >
+              {images.length > 0 ? (
+                <>
+                  {/* Images */}
+                  <div className="relative w-full h-full">
+                    {images.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt={`${project.title} screenshot ${index + 1}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                          index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Navigation Arrows */}
+                  {images.length > 1 && (
+                    <>
+                      <button
+                        onClick={prevImage}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={nextImage}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+                    </>
+                  )}
+
+                  {/* Dots Indicator */}
+                  {images.length > 1 && (
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                      {images.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`w-2 h-2 rounded-full transition-all ${
+                            index === currentImageIndex 
+                              ? 'bg-white w-6' 
+                              : 'bg-white/50 hover:bg-white/75'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                /* Fallback gradient if no images */
+                <div className={`w-full h-full bg-gradient-to-br ${project.gradient}`}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+                      <Play className="w-8 h-8 text-white fill-white" />
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-8 left-8 w-32 h-32 border border-white/20 rounded-full" />
+                    <div className="absolute bottom-8 right-8 w-48 h-48 border border-white/10 rounded-lg rotate-12" />
+                  </div>
                 </div>
-              </div>
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-8 left-8 w-32 h-32 border border-white/20 rounded-full" />
-                <div className="absolute bottom-8 right-8 w-48 h-48 border border-white/10 rounded-lg rotate-12" />
-              </div>
+              )}
             </div>
           </div>
         </div>
