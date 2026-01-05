@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Play, Github, Calendar } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Play, ShoppingCart, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Navbar } from '@/components/portfolio/Navbar';
 import { Footer } from '@/components/portfolio/Footer';
@@ -241,8 +241,8 @@ export default function ProjectDetail() {
                   View Live Demo
                 </Button>
                 <Button size="lg" variant="outline" className="gap-2">
-                  <Github className="w-4 h-4" />
-                  Store to Buy Template
+                  <ShoppingCart className="w-4 h-4" />
+                  Buy
                 </Button>
               </div>
             </div>
