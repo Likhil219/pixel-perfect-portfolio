@@ -31,6 +31,7 @@ interface Project {
   features: string[];
   results: string[];
   technologies: string[];
+  images: string[];
   liveUrl?: string;
   youtubeUrl?: string;
   buyUrl?: string;
@@ -60,6 +61,11 @@ const mockProjects: Project[] = [
       '24/7 availability for patients'
     ],
     technologies: ['WhatsApp API', 'Node.js', 'MongoDB', 'Airtable'],
+    images: [
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800',
+      'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800',
+      'https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=800'
+    ],
     liveUrl: 'https://example.com',
     youtubeUrl: 'https://youtube.com/watch?v=example',
     buyUrl: 'https://store.example.com',
@@ -84,6 +90,10 @@ const mockProjects: Project[] = [
       '3x faster order processing'
     ],
     technologies: ['Shopify API', 'React', 'Supabase'],
+    images: [
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
+      'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800'
+    ],
     liveUrl: 'https://tasks.example.com',
     status: 'active',
     year: '2024',
@@ -100,6 +110,7 @@ interface FormData {
   features: string;
   results: string;
   technologies: string;
+  images: string;
   liveUrl: string;
   youtubeUrl: string;
   buyUrl: string;
@@ -116,6 +127,7 @@ const initialFormData: FormData = {
   features: '',
   results: '',
   technologies: '',
+  images: '',
   liveUrl: '',
   youtubeUrl: '',
   buyUrl: '',
@@ -198,6 +210,7 @@ export default function AdminProjects() {
       features: project.features.join('\n'),
       results: project.results.join('\n'),
       technologies: project.technologies.join(', '),
+      images: project.images.join('\n'),
       liveUrl: project.liveUrl || '',
       youtubeUrl: project.youtubeUrl || '',
       buyUrl: project.buyUrl || '',
@@ -225,6 +238,7 @@ export default function AdminProjects() {
       features: formData.features.split('\n').map((f) => f.trim()).filter(Boolean),
       results: formData.results.split('\n').map((r) => r.trim()).filter(Boolean),
       technologies: formData.technologies.split(',').map((t) => t.trim()).filter(Boolean),
+      images: formData.images.split('\n').map((i) => i.trim()).filter(Boolean),
       liveUrl: formData.liveUrl || undefined,
       youtubeUrl: formData.youtubeUrl || undefined,
       buyUrl: formData.buyUrl || undefined,
@@ -404,6 +418,21 @@ export default function AdminProjects() {
                 <div className="space-y-4 pt-4 border-t border-border">
                   <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Links & Media</h3>
                   
+                  <div className="space-y-2">
+                    <Label htmlFor="images" className="text-foreground flex items-center gap-2">
+                      <span className="text-sm">🖼️</span>
+                      Project Images (URLs)
+                    </Label>
+                    <Textarea
+                      id="images"
+                      value={formData.images}
+                      onChange={(e) => setFormData({ ...formData, images: e.target.value })}
+                      className="bg-background/50 border-border min-h-[100px] focus:border-accent resize-none"
+                      placeholder="Enter each image URL on a new line:&#10;https://example.com/image1.jpg&#10;https://example.com/image2.jpg&#10;https://example.com/image3.jpg"
+                    />
+                    <p className="text-xs text-muted-foreground">Enter each image URL on a new line. Images will auto-scroll in carousel.</p>
+                  </div>
+
                   <div className="grid grid-cols-1 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="liveUrl" className="text-foreground flex items-center gap-2">
