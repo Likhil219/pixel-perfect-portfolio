@@ -58,7 +58,21 @@ export function ContactSection() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
 
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
+      {/* Side Video - Only visible on large screens */}
+      <div className="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 w-64 2xl:w-80 h-[400px] 2xl:h-[480px] overflow-hidden rounded-l-2xl shadow-2xl">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="/videos/contact-side.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-background/30 to-transparent pointer-events-none" />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-6 xl:mr-72 2xl:mr-80 relative z-10">
         {/* Section Header */}
         <div 
           className={`text-center mb-12 transition-all duration-700 ${
