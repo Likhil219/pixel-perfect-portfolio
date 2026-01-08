@@ -97,6 +97,21 @@ export function TestimonialsSection() {
 
   return (
     <section id="testimonials" ref={ref} className="py-24 md:py-32 relative overflow-hidden">
+      {/* Full-width Background Video */}
+      <div className="absolute inset-0 w-full h-full">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="/videos/testimonials-crowd.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+      </div>
+
       {/* Background Elements */}
       <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
@@ -131,7 +146,7 @@ export function TestimonialsSection() {
                 className={`absolute inset-0 mt-12 ml-16 cursor-pointer transition-all duration-500 ease-out`}
                 style={getCardStyle(index)}
               >
-                <div className={`relative bg-card border-2 ${getCardBorderColor(index)} rounded-3xl p-8 md:p-10 h-full shadow-xl transition-all duration-500`}>
+                <div className={`relative bg-card/95 backdrop-blur-md border-2 ${getCardBorderColor(index)} rounded-3xl p-8 md:p-10 h-full shadow-xl transition-all duration-500`}>
                   {/* Quote Icon */}
                   <div className="absolute -top-5 left-8">
                     <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-md">
@@ -194,22 +209,6 @@ export function TestimonialsSection() {
         <p className="text-center text-sm text-muted-foreground mt-12">
           Click card to see next testimonial
         </p>
-
-        {/* Bottom Video */}
-        <div className="mt-16 md:mt-24 w-full max-w-4xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-auto object-cover"
-            >
-              <source src="/videos/testimonials-crowd.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none" />
-          </div>
-        </div>
       </div>
     </section>
   );
