@@ -10,6 +10,7 @@ const projects = [
     category: 'Healthcare',
     description: 'WhatsApp-based appointment booking with auto reminders',
     gradient: 'from-violet-600 to-indigo-600',
+    thumbnail: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800',
     year: '2024'
   },
   {
@@ -18,6 +19,7 @@ const projects = [
     category: 'Healthcare',
     description: 'End-to-end hospital management automation',
     gradient: 'from-blue-600 to-cyan-500',
+    thumbnail: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800',
     year: '2024'
   },
   {
@@ -26,6 +28,7 @@ const projects = [
     category: 'Business',
     description: 'Complete WhatsApp automation suite for businesses',
     gradient: 'from-emerald-500 to-teal-600',
+    thumbnail: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800',
     year: '2024'
   },
   {
@@ -34,6 +37,7 @@ const projects = [
     category: 'Sales',
     description: 'Automated lead capture and follow-up system',
     gradient: 'from-amber-500 to-orange-600',
+    thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
     year: '2023'
   },
   {
@@ -42,6 +46,7 @@ const projects = [
     category: 'Advanced',
     description: 'AI-powered voice call automation system',
     gradient: 'from-pink-500 to-rose-600',
+    thumbnail: 'https://images.unsplash.com/photo-1590935217281-8f102120d683?w=800',
     year: '2024'
   },
   {
@@ -50,6 +55,7 @@ const projects = [
     category: 'Finance',
     description: 'Automated invoice generation and payment tracking',
     gradient: 'from-purple-600 to-violet-600',
+    thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800',
     year: '2023'
   },
 ];
@@ -115,7 +121,13 @@ export function ProjectsSection() {
           {filteredProjects.map((project, index) => (
             <ProjectCard 
               key={project.id} 
-              {...project} 
+              id={project.id}
+              title={project.title}
+              category={project.category}
+              description={project.description}
+              gradient={project.gradient}
+              thumbnail={project.thumbnail}
+              year={project.year}
               isVisible={isVisible}
               delay={index * 80}
               isHovered={hoveredProject === project.id}
@@ -137,6 +149,7 @@ function ProjectCard({
   category, 
   description, 
   gradient,
+  thumbnail,
   year,
   isVisible, 
   delay,
@@ -151,6 +164,7 @@ function ProjectCard({
   category: string; 
   description: string; 
   gradient: string;
+  thumbnail?: string;
   year: string;
   isVisible: boolean; 
   delay: number;
@@ -172,6 +186,18 @@ function ProjectCard({
     >
       {/* Thumbnail */}
       <div className={`aspect-[4/3] bg-gradient-to-br ${gradient} relative overflow-hidden`}>
+        {/* Thumbnail Image */}
+        {thumbnail && (
+          <img 
+            src={thumbnail} 
+            alt={title}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+        )}
+        
+        {/* Gradient Overlay (always shown, more prominent without thumbnail) */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${gradient} ${thumbnail ? 'opacity-40' : 'opacity-100'}`} />
+        
         {/* Pattern Overlay */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-4 left-4 w-20 h-20 border border-white/20 rounded-full" />

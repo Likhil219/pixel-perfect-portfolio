@@ -31,6 +31,7 @@ interface Project {
   features: string[];
   results: string[];
   technologies: string[];
+  thumbnail: string;
   images: string[];
   liveUrl?: string;
   youtubeUrl?: string;
@@ -61,6 +62,7 @@ const mockProjects: Project[] = [
       '24/7 availability for patients'
     ],
     technologies: ['WhatsApp API', 'Node.js', 'MongoDB', 'Airtable'],
+    thumbnail: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800',
     images: [
       'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800',
       'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800',
@@ -90,6 +92,7 @@ const mockProjects: Project[] = [
       '3x faster order processing'
     ],
     technologies: ['Shopify API', 'React', 'Supabase'],
+    thumbnail: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
     images: [
       'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
       'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800'
@@ -110,6 +113,7 @@ interface FormData {
   features: string;
   results: string;
   technologies: string;
+  thumbnail: string;
   images: string;
   liveUrl: string;
   youtubeUrl: string;
@@ -127,6 +131,7 @@ const initialFormData: FormData = {
   features: '',
   results: '',
   technologies: '',
+  thumbnail: '',
   images: '',
   liveUrl: '',
   youtubeUrl: '',
@@ -210,6 +215,7 @@ export default function AdminProjects() {
       features: project.features.join('\n'),
       results: project.results.join('\n'),
       technologies: project.technologies.join(', '),
+      thumbnail: project.thumbnail,
       images: project.images.join('\n'),
       liveUrl: project.liveUrl || '',
       youtubeUrl: project.youtubeUrl || '',
@@ -238,6 +244,7 @@ export default function AdminProjects() {
       features: formData.features.split('\n').map((f) => f.trim()).filter(Boolean),
       results: formData.results.split('\n').map((r) => r.trim()).filter(Boolean),
       technologies: formData.technologies.split(',').map((t) => t.trim()).filter(Boolean),
+      thumbnail: formData.thumbnail,
       images: formData.images.split('\n').map((i) => i.trim()).filter(Boolean),
       liveUrl: formData.liveUrl || undefined,
       youtubeUrl: formData.youtubeUrl || undefined,
@@ -418,6 +425,35 @@ export default function AdminProjects() {
                 <div className="space-y-4 pt-4 border-t border-border">
                   <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Links & Media</h3>
                   
+                  <div className="space-y-2">
+                    <Label htmlFor="thumbnail" className="text-foreground flex items-center gap-2">
+                      <span className="text-sm">🎯</span>
+                      Thumbnail Image (URL) *
+                    </Label>
+                    <Input
+                      id="thumbnail"
+                      type="url"
+                      value={formData.thumbnail}
+                      onChange={(e) => setFormData({ ...formData, thumbnail: e.target.value })}
+                      placeholder="https://example.com/thumbnail.jpg"
+                      className="bg-background/50 border-border h-11 focus:border-accent"
+                      required
+                    />
+                    {formData.thumbnail && (
+                      <div className="mt-2 rounded-lg overflow-hidden border border-border w-32 h-24">
+                        <img 
+                          src={formData.thumbnail} 
+                          alt="Thumbnail preview" 
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/placeholder.svg';
+                          }}
+                        />
+                      </div>
+                    )}
+                    <p className="text-xs text-muted-foreground">This image will be shown as the project card thumbnail in the portfolio.</p>
+                  </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="images" className="text-foreground flex items-center gap-2">
                       <span className="text-sm">🖼️</span>
