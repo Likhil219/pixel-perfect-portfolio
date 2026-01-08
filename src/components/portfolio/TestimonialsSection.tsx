@@ -194,6 +194,22 @@ export function TestimonialsSection() {
         <p className="text-center text-sm text-muted-foreground mt-12">
           Click card to see next testimonial
         </p>
+
+        {/* Bottom Video */}
+        <div className="mt-16 md:mt-24 w-full max-w-4xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto object-cover"
+            >
+              <source src="/videos/testimonials-crowd.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none" />
+          </div>
+        </div>
       </div>
     </section>
   );
