@@ -1,22 +1,15 @@
 import { useEffect, useState } from 'react';
 import { ArrowDown, Play } from 'lucide-react';
 
-interface HeroSectionProps {
-  isVisible?: boolean;
-}
-
-export function HeroSection({ isVisible = true }: HeroSectionProps) {
+export function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (isVisible) {
-      // Staggered animation start
-      const timer = setTimeout(() => {
-        setIsLoaded(true);
-      }, 200);
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible]);
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 200);
+    return () => clearTimeout(timer);
+  }, []);
 
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
