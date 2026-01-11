@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, Sun, Moon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 const navLinks = [
   { label: 'Solutions', hasDropdown: true },
@@ -12,6 +13,12 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +68,19 @@ export function Navbar() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="relative p-2.5 rounded-full bg-card border border-border hover:bg-muted transition-all duration-300 group overflow-hidden"
+                aria-label="Toggle theme"
+              >
+                <div className="relative w-5 h-5">
+                  <Sun className={`absolute inset-0 w-5 h-5 text-amber-500 transition-all duration-500 ${theme === 'dark' ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'}`} />
+                  <Moon className={`absolute inset-0 w-5 h-5 text-primary transition-all duration-500 ${theme === 'dark' ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
+                </div>
+              </button>
+            )}
             <button 
               onClick={() => scrollToSection('#contact')}
               className="px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:bg-accent transition-colors"
@@ -97,7 +116,25 @@ export function Navbar() {
                   {link.hasDropdown && <ChevronDown className="w-4 h-4" />}
                 </button>
               ))}
-              <div className="pt-4 mt-2 border-t border-border flex flex-col gap-2">
+              <div className="pt-4 mt-2 border-t border-border flex flex-col gap-3">
+                {mounted && (
+                  <button
+                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                    className="mx-4 py-3 flex items-center justify-center gap-2 bg-card border border-border text-foreground text-sm font-medium rounded-full hover:bg-muted transition-colors"
+                  >
+                    {theme === 'dark' ? (
+                      <>
+                        <Sun className="w-4 h-4 text-amber-500" />
+                        Light Mode
+                      </>
+                    ) : (
+                      <>
+                        <Moon className="w-4 h-4 text-primary" />
+                        Dark Mode
+                      </>
+                    )}
+                  </button>
+                )}
                 <button 
                   onClick={() => scrollToSection('#contact')}
                   className="mx-4 py-3 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:bg-accent transition-colors"
