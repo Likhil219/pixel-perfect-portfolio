@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronDown, Sparkles, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 
 const navLinks = [
   { label: 'Solutions', hasDropdown: true },
@@ -40,11 +40,8 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-primary" />
-            </div>
-            <span className="font-display font-bold text-xl text-foreground">Marketeam</span>
+          <a href="/" className="font-display font-bold text-2xl text-foreground tracking-tight">
+            AitomationZ<span className="text-primary">.</span>
           </a>
 
           {/* Desktop Navigation */}

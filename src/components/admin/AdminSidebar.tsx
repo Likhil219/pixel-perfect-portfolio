@@ -6,8 +6,7 @@ import {
   MessageSquareQuote, 
   LogOut,
   ChevronLeft,
-  Menu,
-  Sparkles
+  Menu
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -39,12 +38,9 @@ export function AdminSidebar() {
       {/* Header */}
       <div className="h-16 flex items-center justify-between px-4 border-b border-border">
         {!collapsed && (
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center">
-              <Sparkles className="h-4 w-4 text-white" />
-            </div>
-            <span className="font-bold text-lg text-foreground font-display">Admin</span>
-          </div>
+          <a href="/" className="font-display font-bold text-lg text-foreground tracking-tight">
+            AitomationZ<span className="text-primary">.</span>
+          </a>
         )}
         <Button
           variant="ghost"
