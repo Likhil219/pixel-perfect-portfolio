@@ -4,8 +4,7 @@ import {
   Linkedin, 
   Twitter, 
   Github, 
-  ArrowUp,
-  Sparkles
+  ArrowUp
 } from 'lucide-react';
 
 const socialLinks = [
@@ -45,12 +44,9 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <span className="font-display text-xl font-bold">Studio</span>
-            </div>
+            <a href="/" className="font-display font-bold text-2xl text-foreground tracking-tight">
+              AitomationZ<span className="text-primary">.</span>
+            </a>
             <p className="text-muted-foreground max-w-xs">
               Crafting exceptional digital experiences for ambitious brands worldwide.
             </p>
@@ -93,7 +89,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Studio. All rights reserved.
+            © {new Date().getFullYear()} AitomationZ. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
             Designed & Built with passion
