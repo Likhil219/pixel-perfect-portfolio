@@ -194,7 +194,7 @@ export function ContactSection() {
           <div className="mt-8 pt-8 border-t border-border text-center">
             <p className="text-muted-foreground flex items-center justify-center gap-2">
               <Mail className="w-4 h-4" />
-              Prefer email? <a href="mailto:hello@example.com" className="text-primary hover:underline">hello@example.com</a>
+              Prefer email? <a href="mailto:likhilcy125@gmail.com" className="text-primary hover:underline">likhilcy125@gmail.com</a>
             </p>
           </div>
         </div>
