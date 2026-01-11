@@ -4,6 +4,7 @@ import {
   FolderKanban, 
   Briefcase, 
   MessageSquareQuote, 
+  FileText,
   LogOut,
   ChevronLeft,
   Menu
@@ -17,6 +18,7 @@ const navItems = [
   { to: '/admin/projects', icon: FolderKanban, label: 'Projects' },
   { to: '/admin/experience', icon: Briefcase, label: 'Experience' },
   { to: '/admin/testimonials', icon: MessageSquareQuote, label: 'Testimonials' },
+  { to: '/admin/blog', icon: FileText, label: 'Blog' },
 ];
 
 export function AdminSidebar() {
