@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 
 const navLinks = [
+  { label: 'Solutions', hasDropdown: true },
+  { label: 'Blog', href: '#about' },
   { label: 'How it works', href: '#services' },
+  { label: 'Pricing', href: '#projects' },
   { label: 'AI Agent', href: '#contact' },
 ];
 
@@ -47,10 +50,11 @@ export function Navbar() {
               {navLinks.map((link) => (
                 <button
                   key={link.label}
-                  onClick={() => scrollToSection(link.href)}
+                  onClick={() => link.href && scrollToSection(link.href)}
                   className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted"
                 >
                   {link.label}
+                  {link.hasDropdown && <ChevronDown className="w-4 h-4" />}
                 </button>
               ))}
             </div>
@@ -86,10 +90,11 @@ export function Navbar() {
               {navLinks.map((link) => (
                 <button
                   key={link.label}
-                  onClick={() => scrollToSection(link.href)}
+                  onClick={() => link.href && scrollToSection(link.href)}
                   className="flex items-center justify-between px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                 >
                   {link.label}
+                  {link.hasDropdown && <ChevronDown className="w-4 h-4" />}
                 </button>
               ))}
               <div className="pt-4 mt-2 border-t border-border flex flex-col gap-2">
