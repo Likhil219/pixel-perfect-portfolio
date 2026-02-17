@@ -56,31 +56,28 @@ export function TestimonialsSection() {
     const position = (index - activeIndex + testimonials.length) % testimonials.length;
     
     if (position === 0) {
-      // Front card
       return {
         transform: isAnimating 
-          ? 'translateX(-60px) translateY(-40px) scale(0.9) rotate(-3deg)' 
-          : 'translateX(0) translateY(0) scale(1) rotate(0deg)',
+          ? 'translateY(40px) scale(0.88)' 
+          : 'translateY(0) scale(1)',
         zIndex: 30,
-        opacity: isAnimating ? 0.5 : 1,
+        opacity: isAnimating ? 0 : 1,
       };
     } else if (position === 1) {
-      // Second card (behind left-top)
       return {
         transform: isAnimating
-          ? 'translateX(0) translateY(0) scale(1) rotate(0deg)'
-          : 'translateX(-30px) translateY(-20px) scale(0.95) rotate(-2deg)',
+          ? 'translateY(0) scale(1)'
+          : 'translateY(16px) scale(0.95)',
         zIndex: isAnimating ? 30 : 20,
-        opacity: isAnimating ? 1 : 0.8,
+        opacity: isAnimating ? 1 : 0.85,
       };
     } else {
-      // Third card (further behind left-top)
       return {
         transform: isAnimating
-          ? 'translateX(-30px) translateY(-20px) scale(0.95) rotate(-2deg)'
-          : 'translateX(-60px) translateY(-40px) scale(0.9) rotate(-4deg)',
+          ? 'translateY(16px) scale(0.95)'
+          : 'translateY(32px) scale(0.9)',
         zIndex: 10,
-        opacity: isAnimating ? 0.8 : 0.5,
+        opacity: isAnimating ? 0.85 : 0.6,
       };
     }
   };
@@ -131,19 +128,19 @@ export function TestimonialsSection() {
 
         {/* Stacked Cards Container */}
         <div 
-          className={`relative h-[420px] md:h-[380px] transition-all duration-700 ${
+          className={`relative h-[400px] md:h-[360px] transition-all duration-700 ${
             isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}
           style={{ transitionDelay: '200ms' }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="relative w-full max-w-2xl mx-auto h-full pt-12 pl-16">
+          <div className="relative w-full max-w-2xl mx-auto h-full">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
                 onClick={handleCardClick}
-                className={`absolute inset-0 mt-12 ml-16 cursor-pointer transition-all duration-500 ease-out`}
+                className="absolute inset-0 cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
                 style={getCardStyle(index)}
               >
                 <div className={`relative bg-card/95 backdrop-blur-md border-2 ${getCardBorderColor(index)} rounded-3xl p-8 md:p-10 h-full shadow-xl transition-all duration-500`}>
