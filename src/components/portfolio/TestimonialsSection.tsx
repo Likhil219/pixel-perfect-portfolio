@@ -44,8 +44,8 @@ export function TestimonialsSection() {
     setIsAnimating(true);
     setTimeout(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
-      setIsAnimating(false);
-    }, 400);
+      setTimeout(() => setIsAnimating(false), 50);
+    }, 500);
   };
 
   const handleCardClick = () => {
@@ -58,7 +58,7 @@ export function TestimonialsSection() {
     if (position === 0) {
       return {
         transform: isAnimating 
-          ? 'translateY(40px) scale(0.88)' 
+          ? 'translateY(-60px) scale(0.95)' 
           : 'translateY(0) scale(1)',
         zIndex: 30,
         opacity: isAnimating ? 0 : 1,
@@ -67,17 +67,17 @@ export function TestimonialsSection() {
       return {
         transform: isAnimating
           ? 'translateY(0) scale(1)'
-          : 'translateY(16px) scale(0.95)',
-        zIndex: isAnimating ? 30 : 20,
-        opacity: isAnimating ? 1 : 0.85,
+          : 'translateY(16px) scale(0.96)',
+        zIndex: 20,
+        opacity: isAnimating ? 0 : 0.7,
       };
     } else {
       return {
         transform: isAnimating
-          ? 'translateY(16px) scale(0.95)'
-          : 'translateY(32px) scale(0.9)',
+          ? 'translateY(16px) scale(0.96)'
+          : 'translateY(32px) scale(0.92)',
         zIndex: 10,
-        opacity: isAnimating ? 0.85 : 0.6,
+        opacity: 0,
       };
     }
   };
